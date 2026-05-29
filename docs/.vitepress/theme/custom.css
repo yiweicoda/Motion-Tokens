@@ -1,0 +1,67 @@
+/* Shared styling for the live demo components. Kept minimal — the motion
+   itself comes from the tokens; this is just layout/chrome for the demos. */
+
+.demo {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0;
+  background: var(--vp-c-bg-soft);
+}
+
+.demo__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.demo__stage {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  min-height: 80px;
+}
+
+.demo__btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.demo__btn--ghost {
+  background: transparent;
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.demo__chip {
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-2);
+}
+
+.demo__box {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: var(--vp-c-brand-1);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}

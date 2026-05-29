@@ -1,0 +1,67 @@
+/**
+ * Motion Design Tokens — source of truth
+ * ---------------------------------------
+ * Every duration, easing curve, delay and displacement used for motion in the
+ * product is defined here as a CSS custom property. Consume them directly
+ * (`transition: transform var(--motion-duration-fast) var(--motion-ease-standard)`)
+ * or via the Tailwind utilities that map to these same variables.
+ *
+ * Values follow the motion-design guidance: most UI motion lives in 150–400ms,
+ * entrances ease-OUT (decelerate), permanent exits ease-IN (accelerate),
+ * on-screen moves use the standard curve, and `linear` is reserved for loops.
+ */
+
+:root {
+  /* ----------------------------------------------------------------------- */
+  /* 1. Durations                                                            */
+  /* ----------------------------------------------------------------------- */
+  --motion-duration-instant: 0ms;   /* disabled / reduced-motion             */
+  --motion-duration-fast: 150ms;    /* micro-feedback: hover, ripple, toggle */
+  --motion-duration-base: 250ms;    /* default transition / entrance         */
+  --motion-duration-slow: 350ms;    /* large or complex surface moves        */
+  --motion-duration-slower: 500ms;  /* scroll reveals / hero moments (cap)   */
+  --motion-duration-exit: 200ms;    /* elements leaving (shorter)            */
+
+  /* ----------------------------------------------------------------------- */
+  /* 2. Easing curves                                                        */
+  /* ----------------------------------------------------------------------- */
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);   /* on-screen moves (default)     */
+  --motion-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);   /* entrances (ease-out)          */
+  --motion-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);   /* permanent exits (ease-in)     */
+  --motion-ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);      /* exit that may return          */
+  --motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);   /* expressive large transitions  */
+  --motion-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);/* playful overshoot (sparingly) */
+  --motion-ease-linear: linear;                           /* continuous loops only         */
+
+  /* ----------------------------------------------------------------------- */
+  /* 3. Delay / stagger — incremental delay between sequenced items          */
+  /* ----------------------------------------------------------------------- */
+  --motion-stagger-xs: 30ms;
+  --motion-stagger-sm: 50ms;
+  --motion-stagger-md: 80ms;
+
+  /* ----------------------------------------------------------------------- */
+  /* 4. Displacement — standard slide-in / slide-out travel distances        */
+  /* ----------------------------------------------------------------------- */
+  --motion-distance-sm: 4px;
+  --motion-distance-md: 8px;
+  --motion-distance-lg: 16px;
+  --motion-distance-xl: 24px;
+
+  /* ----------------------------------------------------------------------- */
+  /* 5. Semantic / composite tokens                                          */
+  /*    Ready-to-apply `transition` shorthands pairing the correct duration  */
+  /*    and easing for each interaction. Apply the value to `transition`.    */
+  /* ----------------------------------------------------------------------- */
+  --motion-hover: var(--motion-duration-fast) var(--motion-ease-standard);
+  --motion-press: 100ms var(--motion-ease-standard);
+  --motion-toggle: var(--motion-duration-exit) var(--motion-ease-standard);
+  --motion-dropdown: var(--motion-duration-exit) var(--motion-ease-decelerate);
+  --motion-modal-enter: var(--motion-duration-slow) var(--motion-ease-decelerate);
+  --motion-modal-exit: var(--motion-duration-exit) var(--motion-ease-accelerate);
+  --motion-drawer: var(--motion-duration-slow) var(--motion-ease-sharp);
+  --motion-toast-enter: var(--motion-duration-base) var(--motion-ease-decelerate);
+  --motion-tab-indicator: var(--motion-duration-base) var(--motion-ease-standard);
+  --motion-accordion: var(--motion-duration-slow) var(--motion-ease-standard);
+  --motion-page: var(--motion-duration-slow) var(--motion-ease-standard);
+}

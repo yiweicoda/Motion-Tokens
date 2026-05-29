@@ -1,0 +1,7 @@
+/**
+ * Motion tokens entry point.
+ * Import this once in your app:  import '@your-org/motion-tokens/src/index.css'
+ */
+@import './tokens/motion.css';
+@import './tokens/keyframes.css';
+@import './tokens/reduced-motion.css';

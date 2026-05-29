@@ -1,0 +1,79 @@
+/**
+ * Keyframe presets
+ * ----------------
+ * Named, reusable @keyframes built on the motion tokens. Drive them with the
+ * token durations/easings — e.g.
+ *   animation: slide-up var(--motion-duration-base) var(--motion-ease-decelerate) both;
+ * or use the matching Tailwind `animate-*` utilities registered in
+ * tailwind.config.js.
+ *
+ * Only `transform` and `opacity` are animated so everything composites on the
+ * GPU and holds 60fps.
+ */
+
+/* Fades --------------------------------------------------------------------- */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Slides (entrances) — travel uses --motion-distance-lg ---------------------- */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(var(--motion-distance-lg)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(calc(-1 * var(--motion-distance-lg))); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(var(--motion-distance-lg)); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(calc(-1 * var(--motion-distance-lg))); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Scale / pop --------------------------------------------------------------- */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Inline error — small, quick shake ----------------------------------------- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+/* Continuous / status — these loop with linear easing ----------------------- */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* Ripple — radiating press feedback ----------------------------------------- */
+@keyframes ripple {
+  from { opacity: 0.4; transform: scale(0); }
+  to   { opacity: 0;   transform: scale(2.5); }
+}

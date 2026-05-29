@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(sleep 4 && grep -oE \"localhost:[0-9]+\" /tmp/motion-vp.log | head -1)",
+      "Bash(node -e ' *)",
+      "Bash(node --input-type=module)",
+      "Bash(git add *)",
+      "Bash(git init *)",
+      "Bash(git config *)"
+    ]
+  }
+}

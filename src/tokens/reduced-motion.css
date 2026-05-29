@@ -1,0 +1,22 @@
+/**
+ * Reduced-motion fallback
+ * -----------------------
+ * Non-negotiable accessibility layer. Users with vestibular disorders can be
+ * disoriented or nauseated by motion. When the OS requests reduced motion we
+ * collapse animations and transitions to near-instant.
+ *
+ * Reminder enforced in the docs: motion must NEVER be the only signal of a
+ * state change — always pair it with a colour, text or icon change so the
+ * change still reads when motion is removed.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
