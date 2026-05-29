@@ -4,6 +4,60 @@ All notable changes to motion-tokens are documented here.
 
 ---
 
+## [1.0.1] — 2026-05-29
+
+### Changed — Shimmer effect refined for primary CTAs
+
+**`.fx-shimmer` is now perpetual and optimized for high-visibility call-to-action buttons:**
+
+- **Perpetual loop instead of hover**: The gloss sweep runs continuously (`shimmer-loop` keyframe: 45% visible sweep + 55% off-screen pause, 3s cycle) to keep drawing the eye. No hover required.
+- **Always behind the label**: `z-index: -1` + the host's `isolation: isolate` ensures the highlight paints under the text, so it never reduces label legibility even at full opacity.
+- **Slower tempo**: `--motion-shimmer-sweep` increased from 900ms to 3s for a more deliberate, premium feel.
+- **Opt-in backward compatibility**: A `.fx-shimmer--hover` modifier restores the original one-shot-on-hover behavior for quieter accents.
+
+Use `.fx-shimmer` on **exactly one** button per view — the perpetual motion is attention-drawing by design.
+
+---
+
+## [0.2.0] — 2026-05-29
+
+### Added — Button interaction effects
+
+Three opt-in, framework-agnostic button accents delivered as token-driven CSS
+utility classes (`src/effects.css`, imported from `src/index.css`):
+
+- **`.fx-shimmer`** — a diagonal gloss highlight that loops **perpetually behind
+  the button label** (`z-index: -1`, so it never reduces text legibility) to draw
+  the eye to a primary CTA. Tempo: new `--motion-shimmer-sweep` token (3s loop =
+  sweep + pause). Themable via `--fx-shimmer-color`. A `.fx-shimmer--hover`
+  modifier restores the original one-shot-on-hover behaviour for non-CTA buttons.
+- **`.fx-ripple`** — a Material-style ripple that radiates from the **click
+  point**. Pairs with a tiny JS helper in `src/ripple.js` (exported at
+  `motion-tokens/ripple`): `createRipple(event)` for any framework, plus a Vue
+  `vRipple` directive. Tempo: new `--motion-ripple` token (350ms). Themable via
+  `--fx-ripple-color`.
+- **`.fx-glow-border`** — a system-level running conic border: a gold "comet"
+  rotates clockwise around the edge. Tempo: new `--motion-border-spin` token
+  (3.2s, linear). Built with a registered `@property --angle` rotating
+  `conic-gradient` masked to a ring, so it scales to any button size. Themable
+  via `--fx-border-width`, `--fx-border-radius`, `--fx-border-track`,
+  `--fx-border-glow`, `--fx-border-hot`.
+
+Reproduces the gold-comet border from the reference CodePen (which was actually
+an SVG animated linear-gradient stroke) using the size-agnostic conic technique,
+carrying over its exact colours (`#fff8e0` → `#ffc700` → transparent over
+`#4e3c00`) and 3.2s linear timing.
+
+### Also
+- New `effects` export in `src/tokens.js` and `border-spin` / `gloss-sweep`
+  entries in `keyframes`.
+- New docs page **Button effects** (`docs/tokens/button-effects.md`) with a live
+  `ButtonEffects.vue` demo.
+- `prefers-reduced-motion`: the gloss sweep and border loop stop; the ripple
+  collapses to instant. Effects are accents, never the only affordance.
+
+---
+
 ## [1.0.0] — 2026-05-29
 
 ### Initial Release

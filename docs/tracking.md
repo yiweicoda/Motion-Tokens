@@ -30,6 +30,9 @@ token so it never goes stale.
 | `motion-accordion` | Semantic | ✅ | Accordion | — | |
 | `motion-page` | Semantic | ⬜ | — | — | Router transition pending |
 | keyframe presets | Keyframes | 🚧 | Loaders, reveals | — | `ripple` not yet adopted |
+| `motion-shimmer-sweep` | Effect | ✅ | `.fx-shimmer` CTA buttons | — | Perpetual loop (3s) behind label; `--hover` for one-shot |
+| `motion-ripple` | Effect | ✅ | `.fx-ripple` buttons | — | Needs `v-ripple` / `createRipple` |
+| `motion-border-spin` | Effect | ✅ | `.fx-glow-border` buttons | — | System-level running conic border (3.2s) |
 
 ## How to track adoption in your app
 
@@ -45,3 +48,5 @@ Record every token change here so consumers can upgrade confidently.
 | Date | Version | Change |
 |---|---|---|
 | 2026-05-29 | 0.1.0 | Initial token set: durations, easing, stagger, displacement, semantic, keyframes. |
+| 2026-05-29 | 0.2.0 | Button interaction effects: `.fx-shimmer`, `.fx-ripple` (+ `v-ripple`), `.fx-glow-border`; tokens `--motion-shimmer-sweep`, `--motion-ripple`, `--motion-border-spin`. |
+| 2026-05-29 | 1.0.1 | `.fx-shimmer` refined: now perpetual (loop instead of hover), slower (3s), always behind label (`z-index: -1`); added `.fx-shimmer--hover` modifier for one-shot behavior. |
