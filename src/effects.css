@@ -1,0 +1,120 @@
+/**
+ * Decorative interaction effects — opt-in button accents.
+ * -------------------------------------------------------
+ * Framework-agnostic utility classes driven by the motion tokens. Add a class
+ * to any element to opt in; nothing here is applied by default.
+ *
+ *   <button class="fx-shimmer">     gloss sweep on hover
+ *   <button class="fx-ripple" v-ripple>  click-point ripple (needs the JS helper)
+ *   <button class="fx-glow-border"> running conic border
+ *
+ * Tempos come from tokens (motion.css): --motion-shimmer-sweep, --motion-ripple,
+ * --motion-border-spin. Colours are overridable via the --fx-* custom props.
+ *
+ * Only transform / opacity / the registered --angle animate, so everything
+ * composites on the GPU and holds 60fps.
+ */
+
+/* ===========================================================================
+   1. Gloss shimmer — diagonal highlight sweeping across the button on hover
+   =========================================================================== */
+.fx-shimmer {
+  position: relative;
+  overflow: hidden; /* clip the sweep to the button shape */
+  isolation: isolate;
+}
+.fx-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* z-index:-1 + the host's isolation:isolate puts the band BEHIND the label
+     (paint order: background → shimmer → text), so it never dims the content. */
+  z-index: -1;
+  /* a narrow band of light; --fx-shimmer-color themable (default: white gloss) */
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    var(--fx-shimmer-color, rgba(255, 255, 255, 0.5)) 50%,
+    transparent 70%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+  /* Perpetual: continuously draws the eye to a primary CTA. */
+  animation: shimmer-loop var(--motion-shimmer-sweep) var(--motion-ease-standard) infinite;
+}
+
+/* Opt back into the original one-shot-on-hover behaviour for non-CTA buttons. */
+.fx-shimmer--hover::after {
+  animation: none;
+}
+.fx-shimmer--hover:hover::after,
+.fx-shimmer--hover:focus-visible::after {
+  animation: gloss-sweep var(--motion-shimmer-sweep) var(--motion-ease-decelerate);
+}
+
+/* ===========================================================================
+   2. Ripple — radiates from the click point.
+   The .ripple node is spawned by createRipple() / v-ripple in ripple.js and
+   positioned at the click coordinates; this just styles + animates it.
+   =========================================================================== */
+.fx-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.fx-ripple .fx-ripple__wave {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--fx-ripple-color, rgba(255, 255, 255, 0.5));
+  transform: scale(0);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: ripple var(--motion-ripple) var(--motion-ease-decelerate) forwards;
+}
+
+/* ===========================================================================
+   3. Running conic border — gold comet runs clockwise around the edge.
+   Reproduces codepen.io/ywting/pen/VwNmOjp (cream→gold→transparent, 3.2s)
+   with a size-agnostic rotating conic gradient masked to a ring.
+   =========================================================================== */
+.fx-glow-border {
+  position: relative;
+  /* static track sits under the running highlight */
+  border: var(--fx-border-width, 2px) solid var(--fx-border-track, #4e3c00);
+  border-radius: var(--fx-border-radius, 8px);
+}
+.fx-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--fx-border-width, 2px));
+  border-radius: inherit;
+  padding: var(--fx-border-width, 2px);
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    var(--fx-border-glow, #ffc700) 20deg,
+    var(--fx-border-hot, #fff8e0) 32deg,
+    transparent 90deg
+  );
+  /* show only the border ring: fill minus content-box, XOR'd */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: border-spin var(--motion-border-spin) var(--motion-ease-linear) infinite;
+  pointer-events: none;
+}
+
+/* ===========================================================================
+   Reduced motion — looping/decorative effects must not run.
+   (reduced-motion.css already clamps durations globally; this also stops the
+   infinite border loop and hides the one-shot sweep so nothing keeps moving.)
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .fx-glow-border::before { animation: none; }
+  /* stop the perpetual shimmer loop (and the hover variant) entirely */
+  .fx-shimmer::after,
+  .fx-shimmer--hover:hover::after,
+  .fx-shimmer--hover:focus-visible::after { animation: none; }
+}

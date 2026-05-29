@@ -64,4 +64,14 @@
   --motion-tab-indicator: var(--motion-duration-base) var(--motion-ease-standard);
   --motion-accordion: var(--motion-duration-slow) var(--motion-ease-standard);
   --motion-page: var(--motion-duration-slow) var(--motion-ease-standard);
+
+  /* ----------------------------------------------------------------------- */
+  /* 6. Decorative interaction effects (opt-in button accents)               */
+  /*    These drive the .fx-* utility classes in effects.css. Keep them      */
+  /*    system-level so every "glow border" / shimmer in the product shares  */
+  /*    one tempo.                                                           */
+  /* ----------------------------------------------------------------------- */
+  --motion-shimmer-sweep: 3000ms; /* shimmer loop period (sweep + pause)       */
+  --motion-ripple: var(--motion-duration-slow);  /* click-point ripple expand */
+  --motion-border-spin: 3200ms;   /* running conic border rotation period     */
 }

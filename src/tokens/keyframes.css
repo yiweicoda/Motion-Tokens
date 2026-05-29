@@ -77,3 +77,30 @@
   from { opacity: 0.4; transform: scale(0); }
   to   { opacity: 0;   transform: scale(2.5); }
 }
+
+/* Gloss sweep — one diagonal highlight pass (used by .fx-shimmer--hover) ------ */
+@keyframes gloss-sweep {
+  from { transform: translateX(-150%) skewX(-20deg); }
+  to   { transform: translateX(150%) skewX(-20deg); }
+}
+
+/* Shimmer loop — perpetual CTA accent: sweep across, then hold off-screen so
+   each cycle reads as "sweep … pause … sweep" rather than a relentless strobe. */
+@keyframes shimmer-loop {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  45%  { transform: translateX(150%) skewX(-20deg); }
+  100% { transform: translateX(150%) skewX(-20deg); }
+}
+
+/* Running conic border --------------------------------------------------------
+   A registered custom property is required so the browser can interpolate the
+   angle (plain --vars can't animate). Animating --angle keeps the whole effect
+   on the compositor — no layout/paint per frame.                              */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-spin {
+  to { --angle: 360deg; }
+}

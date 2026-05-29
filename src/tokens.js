@@ -69,6 +69,31 @@ export const keyframes = {
   pulse: 'Skeleton / idle pulse (loop)',
   shimmer: 'Skeleton shimmer sweep (loop)',
   ripple: 'Press ripple feedback',
+  'gloss-sweep': 'One-shot gloss pass (.fx-shimmer--hover)',
+  'shimmer-loop': 'Perpetual CTA shimmer (sweep + pause)',
+  'border-spin': 'Running conic border rotation (.fx-glow-border)',
 }
 
-export default { durations, easings, stagger, distance, semantic, keyframes }
+// Opt-in decorative button effects (utility classes in effects.css).
+export const effects = {
+  shimmer: {
+    class: '.fx-shimmer',
+    token: '--motion-shimmer-sweep',
+    value: '3s',
+    job: 'Perpetual gloss sweep behind the label — draws the eye to a primary CTA (.fx-shimmer--hover for one-shot on hover)',
+  },
+  ripple: {
+    class: '.fx-ripple',
+    token: '--motion-ripple',
+    value: '350ms',
+    job: 'Ripple radiates from the click point (needs v-ripple / createRipple)',
+  },
+  'glow-border': {
+    class: '.fx-glow-border',
+    token: '--motion-border-spin',
+    value: '3200ms',
+    job: 'Gold comet runs clockwise around the border (rotating conic gradient)',
+  },
+}
+
+export default { durations, easings, stagger, distance, semantic, keyframes, effects }

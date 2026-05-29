@@ -27,6 +27,7 @@ export default defineConfig({
           { text: 'Displacement', link: '/tokens/displacement' },
           { text: 'Semantic tokens', link: '/tokens/semantic' },
           { text: 'Keyframes', link: '/tokens/keyframes' },
+          { text: 'Button effects', link: '/tokens/button-effects' },
         ],
       },
       {
